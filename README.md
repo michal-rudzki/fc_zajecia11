@@ -6,7 +6,10 @@ Napisz program, który odczyta wejściowy plik CSV, następnie zmodyfikuje go i 
 
 Przykładowy plik wejściowy znajduje się w repozytorium pod nazwą "in.csv".
 
-**Przykład działania:** python reader.py in.csv out.csv 0,0,gitara 3,1,kubek 1,2,17 3,3,0
+**Przykład działania:** 
+```python
+python reader.py in.csv out.csv 0,0,gitara 3,1,kubek 1,2,17 3,3,0
+```
 
 **Z pliku in.csv:**
 
