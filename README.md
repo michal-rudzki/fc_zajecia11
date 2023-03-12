@@ -24,3 +24,10 @@ gitara,3,7,0
 kanapka,12,5,kubek
 pedzel,17,34,5
 plakat,czerwony,8,0
+
+**Wymagane formaty:**
+
+.csv
+.json
+.txt
+.pickle

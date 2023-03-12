@@ -1,7 +1,8 @@
 import csv
 import sys
+from modules import FileExport
 
-class CsvChange:
+class ChangeFile(FileExport):
 
     def __init__(self, *args):
         self.input_file = args[0]
@@ -29,15 +30,10 @@ class CsvChange:
                 output_csv.append(t)
         return output_csv
                 
-    def save_file(self, csv_file, csv_output_content):
-        with open(csv_file, mode = 'w', newline = '') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerows(csv_output_content)
-
 #     0          1          2             3           4         5 
 # ["in.csv", "out.csv", "0,0,gitara", "3,1,kubek", "1,2,17", "3,3,0"]
 def main():
-    file = CsvChange(sys.argv[1], sys.argv[2])
+    file = ChangeFile(sys.argv[1], sys.argv[2])
     csv_content = file.load_file()
     csv_output_content = file.set_col_row_change(sys.argv[3:], csv_content)
     file.save_file(sys.argv[2], csv_output_content)
