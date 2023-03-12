@@ -30,11 +30,6 @@ class ChangeFile(FileExport):
                 output_csv.append(t)
         return output_csv
                 
-    #def save_file(self, csv_file, csv_output_content):
-    #    with open(csv_file, mode = 'w', newline = '') as csvfile:
-    #        writer = csv.writer(csvfile)
-    #        writer.writerows(csv_output_content)
-
 #     0          1          2             3           4         5 
 # ["in.csv", "out.csv", "0,0,gitara", "3,1,kubek", "1,2,17", "3,3,0"]
 def main():

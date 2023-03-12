@@ -1,7 +1,6 @@
 import csv
 import json
 import pickle
-import os
 
 class FileExport:
     
@@ -14,6 +13,10 @@ class FileExport:
         elif out_file.split('.')[1] in ['json']:
             json_file = self.listToJson(output_content)
             self.exportToJson(out_file, json_file)
+        elif out_file.split('.')[1] in ['txt']:
+            self.exportToTxt(out_file, output_content)
+        elif out_file.split('.')[1] in ['pickle']:
+            self.exportToPickle(out_file, output_content)
             
     def exportToCsv(self, csv_file, output_content):
         with open(csv_file, mode = 'w', newline = '') as csvfile:
@@ -30,8 +33,13 @@ class FileExport:
         with open(json_file, mode = 'w') as jsonFile:
             json.dump(output_content, jsonFile, indent = 4)
     
-    def exportToTxt(self):
-        pass
+    def exportToTxt(self, txt_file, output_content):
+        with open(txt_file, mode = 'w') as txtFile:
+            for out in output_content:
+                for as_string in out:
+                    txtFile.write(str(as_string))
+                    txtFile.write("\n")
     
-    def exportToPickle(self):
-        pass
+    def exportToPickle(self, pickle_file, output_content):
+        with open(pickle_file, mode = 'wb') as pickleFile:
+            pickle.dump(output_content, pickleFile, protocol=pickle.HIGHEST_PROTOCOL)
