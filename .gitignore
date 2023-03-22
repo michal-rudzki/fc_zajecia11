@@ -3,4 +3,5 @@
 *.csv
 *.json
 *.pickle
-**/package/__pycache__
+**/__pycache__/
+/tmp
