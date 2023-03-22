@@ -1,0 +1,6 @@
+.vscode/*
+*.txt
+*.csv
+*.json
+*.pickle
+**/package/__pycache__
