@@ -1,7 +1,8 @@
 import json
 import sys
 
-class JSON_export():
+from .changefile import ChangeFile
+class JSON_export(ChangeFile):
     
     def __init__(self, *args):
         self.input_file = sys.argv[1]
@@ -12,6 +13,8 @@ class JSON_export():
         _converted_data = self.JSON_export_change_row_col(_read_file)
         if sys.argv[2].split('.')[1] in ['json']:
             self.JSON_export_save_file(_converted_data)
+        else:
+            self.ChangeFile_export_convert(_converted_data, self.output_file, self.input_file)
         
     def JSON_export_read_file(self):
         content_file = []
