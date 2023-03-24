@@ -7,7 +7,6 @@ class CSV_export(ChangeFile):
     def __init__(self, *args):
         self.input_file = sys.argv[1]
         self.output_file = sys.argv[2]
-        super().__init__(self, *args)
     
     def export_convert(self):
         _read_file = self.CSV_export_read_file()
@@ -15,7 +14,7 @@ class CSV_export(ChangeFile):
         if sys.argv[2].split('.')[1] in ['csv']:
             self.CSV_export_save_file(_converted_data)
         else:
-            self.ChangeFile_export_convert(_converted_data, self.output_file)
+            self.ChangeFile_export_convert(_converted_data, self.output_file, self.input_file)
     
     def CSV_export_read_file(self):
         content_file = []
