@@ -1,32 +1,61 @@
+import sys
 import csv
 import json
 import pickle
-from .fileexport import FileExport
 
-class ChangeFile(FileExport):
+class ChangeFile():
 
-    def __init__(self, *args):
-        self.input_file = args[0]
-        self.output_file = args[1]
+    def __init__(self, data_to_save, output_file, input_file):
+        self.data_to_save = data_to_save
+        self.output_file = output_file
+        self.input_file = input_file
+        
+    def normalize_output_data(self):
+        normalize_output_data = []
+        if self.input_file.split('.')[1] in ['json']:
+            for val in self.data_to_save.values():
+                normalize_output_data.append(val)
+        
+        elif self.input_file.split('.')[1] in ['csv', 'pickle']:
+            normalize_output_data = self.data_to_save
 
-    def load_file(self):
-        content_file = []
-        with open(self.input_file, mode='r', newline='') as csvfile:
-            file = csv.reader(csvfile, delimiter=' ')
-            for read_file in file:
-                content_file.append(read_file)
-        return content_file
+        elif self.input_file.split('.')[1] in ['txt']:
+            while len(self.data_to_save) != 0:
+                normalize_output_data.append(self.data_to_save[0:4])
+                self.data_to_save = self.data_to_save[4:]
+        
+        return normalize_output_data
+            
+    def ChangeFile_export_convert(self, data_to_save, output_file, input_file):
+        self.data_to_save = data_to_save
+        self.output_file = output_file
+        self.input_file = input_file
+        
+        formated_data = self.normalize_output_data()
+        print(formated_data)
 
-    def set_col_row_change(self, cli_args, csv_in_file):
-        tmp = []
-        output_csv = []
-        for count in range(len(cli_args)):
-            row = int(cli_args[count].split(',')[0])
-            col = int(cli_args[count].split(',')[1])
-            val = cli_args[count].split(',')[2]
-            tmp.append(csv_in_file[int(col)][0])
-            if count == col:
-                t = tmp[col].split(',')
-                t[row] = val
-                output_csv.append(t)
-        return output_csv
+        if output_file.split('.')[1] in ['csv']:
+            csv_output = formated_data
+            with open(output_file, mode='w', newline='') as csvfile:
+                csvfile = csv.writer(csvfile)
+                csvfile.writerows(csv_output)
+
+        elif output_file.split('.')[1] in ['json']:
+            json_output = {}
+            for counter in range(len(formated_data)):
+                json_output.update({counter:formated_data[counter]})
+            
+            with open(output_file, mode='w') as jsonfile:
+                json.dump(json_output, jsonfile, indent=4)
+        
+        elif output_file.split('.')[1] in ['txt']:
+            txt_output = formated_data
+            with open(output_file, mode='w') as txtfile:
+                for data in txt_output:
+                    for read_data in data:
+                        txtfile.write(read_data+"\n")
+        
+        elif output_file.split('.')[1] in ['pickle']:
+            pickle_output = formated_data
+            with open(output_file, mode='wb') as picklefile:
+                pickle.dump(pickle_output, picklefile)
