@@ -18,7 +18,7 @@ def main():
         print(f"Input file: {sys.argv[1]}")
         file = JSON_export(sys.argv[1], sys.argv[2])
         file.export_convert()
-
+    
     elif sys.argv[1].split('.')[1] in ['txt']:
         print(f"Input file: {sys.argv[1]}")
         file = TXT_export(sys.argv[1], sys.argv[2])
