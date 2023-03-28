@@ -54,3 +54,8 @@ class ChangeFile():
                 for data in txt_output:
                     for read_data in data:
                         txtfile.write(read_data+"\n")
+        
+        elif output_file.split('.')[1] in ['pickle']:
+            pickle_output = formated_data
+            with open(output_file, mode='wb') as picklefile:
+                pickle.dump(pickle_output, picklefile)
