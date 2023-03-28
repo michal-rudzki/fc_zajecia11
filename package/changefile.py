@@ -16,7 +16,7 @@ class ChangeFile():
             for val in self.data_to_save.values():
                 normalize_output_data.append(val)
         
-        elif self.input_file.split('.')[1] in ['csv']:
+        elif self.input_file.split('.')[1] in ['csv', 'pickle']:
             normalize_output_data = self.data_to_save
 
         elif self.input_file.split('.')[1] in ['txt']:
