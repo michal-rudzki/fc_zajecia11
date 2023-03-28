@@ -26,7 +26,8 @@ def main():
     
     elif sys.argv[1].split('.')[1] in ['pickle']:
         print(f"Input file: {sys.argv[1]}")
-        file = None
+        file = PICKLE_export(sys.argv[1], sys.argv[2])
+        file.export_convert()
 
 if __name__ == "__main__":
     main()
