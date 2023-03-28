@@ -15,8 +15,14 @@ class ChangeFile():
         if self.input_file.split('.')[1] in ['json']:
             for val in self.data_to_save.values():
                 normalize_output_data.append(val)
+        
         elif self.input_file.split('.')[1] in ['csv']:
             normalize_output_data = self.data_to_save
+
+        elif self.input_file.split('.')[1] in ['txt']:
+            while len(self.data_to_save) != 0:
+                normalize_output_data.append(self.data_to_save[0:4])
+                self.data_to_save = self.data_to_save[4:]
         
         return normalize_output_data
             
@@ -41,3 +47,10 @@ class ChangeFile():
             
             with open(output_file, mode='w') as jsonfile:
                 json.dump(json_output, jsonfile, indent=4)
+        
+        elif output_file.split('.')[1] in ['txt']:
+            txt_output = formated_data
+            with open(output_file, mode='w') as txtfile:
+                for data in txt_output:
+                    for read_data in data:
+                        txtfile.write(read_data+"\n")
