@@ -1,7 +1,9 @@
-from .changefile import ChangeFile
-from .fileexport import FileExport
+import pickle
+import sys
 
-class PICKLE_export(FileExport):
+from .changefile import ChangeFile
+
+class PICKLE_export(ChangeFile):
     
     def __init__(self):
         pass
