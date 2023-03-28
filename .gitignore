@@ -1,7 +1,3 @@
-.vscode/*
-*.txt
-*.csv
-*.json
-*.pickle
 **/__pycache__/
 /tmp
+.vscode/*
